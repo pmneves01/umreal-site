@@ -1,0 +1,124 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #000;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Cabeçalho fixo minimalista */
+header {
+    background-color: #0077b6;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.minimal-title {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+#toggle-theme {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Layout principal */
+main {
+    max-width: 500px;
+    margin: 80px auto 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* Input e seletores */
+select, input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    width: 100%;
+}
+
+p {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Notícias */
+.noticias {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: left;
+}
+
+#noticias-container {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Rodapé fixo */
+footer {
+    padding: 10px;
+    background-color: #023e8a;
+    color: white;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+}
+
+/* Modo Escuro */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode header {
+    background-color: #1f1f1f;
+}
+
+.dark-mode main {
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode footer {
+    background-color: #1f1f1f;
+}
+
+.dark-mode select, .dark-mode input {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UmReal - Conversor de Moedas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="minimal-title">UmReal</h1>
+        <button id="toggle-theme">🌙</button>
+    </header>
+    <main>
+        <section class="conversor">
+            <h2>Conversor</h2>
+            <div class="converter">
+                <select id="moeda-origem" onchange="converterMoeda()">
+                    <option value="BRL">Real (BRL)</option>
+                    <option value="USD">Dólar (USD)</option>
+                    <option value="EUR">Euro (EUR)</option>
+                    <option value="GBP">Libra (GBP)</option>
+                    <option value="JPY">Iene (JPY)</option>
+                </select>
+                <input type="number" id="valor-input" placeholder="Valor" oninput="converterMoeda()">
+                <span>⇄</span>
+                <select id="moeda-destino" onchange="converterMoeda()">
+                    <option value="USD">Dólar (USD)</option>
+                    <option value="BRL">Real (BRL)</option>
+                    <option value="EUR">Euro (EUR)</option>
+                    <option value="GBP">Libra (GBP)</option>
+                    <option value="JPY">Iene (JPY)</option>
+                </select>
+                <p id="resultado">0.00</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 UmReal - Dados atualizados em tempo real via API</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.body.classList.add("dark-mode");
+                document.getElementById("toggle-theme").textContent = "☀️";
+            }
+        });
+
+        document.getElementById("toggle-theme").addEventListener("click", function () {
+            document.body.classList.toggle("dark-mode");
+            this.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+        });
+
+        async function converterMoeda() {
+            const moedaOrigem = document.getElementById("moeda-origem").value;
+            const moedaDestino = document.getElementById("moeda-destino").value;
+            const valor = parseFloat(document.getElementById("valor-input").value);
+
+            if (isNaN(valor) || valor <= 0) {
+                document.getElementById("resultado").innerText = "Digite um valor válido";
+                return;
+            }
+
+            if (moedaOrigem === moedaDestino) {
+                document.getElementById("resultado").innerText = `1 ${moedaOrigem} = 1 ${moedaDestino}`;
+                return;
+            }
+
+            const url = `https://economia.awesomeapi.com.br/json/last/${moedaOrigem}-${moedaDestino}`;
+
+            try {
+                const resposta = await fetch(url);
+                if (!resposta.ok) throw new Error("Erro ao buscar conversão");
+                const dados = await resposta.json();
+                const taxa = parseFloat(dados[`${moedaOrigem}${moedaDestino}`]?.bid || dados[`${moedaDestino}${moedaOrigem}`]?.ask);
+
+                if (!taxa) {
+                    document.getElementById("resultado").innerText = "Erro na conversão";
+                    return;
+                }
+
+                const resultado = (valor * taxa).toFixed(2);
+                document.getElementById("resultado").innerText = `${valor} ${moedaOrigem} = ${resultado} ${moedaDestino}`;
+            } catch (erro) {
+                document.getElementById("resultado").innerText = "Erro na conversão";
+                console.error("Erro ao buscar conversão:", erro);
+            }
+        }
+    </script>
+</body>
+</html>
