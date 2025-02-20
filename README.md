@@ -27,8 +27,6 @@ UmReal é um conversor de moedas online desenvolvido para fornecer conversões r
 O site está hospedado via **GitHub Pages** e pode ser acessado pelo link:
 🔗 [https://pmneves01.github.io/umreal-site/](https://pmneves01.github.io/umreal-site/)
 
-## 💰 Monetização
-O site está integrado com **Google AdSense** para exibição de anúncios. Se você deseja contribuir, basta visitar e utilizar o conversor regularmente!
 
 ## 📜 Licença
 Este projeto está sob a licença MIT. Sinta-se livre para modificar e contribuir!
